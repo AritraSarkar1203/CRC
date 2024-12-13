@@ -26,11 +26,12 @@ export const getBookings = async (req, res) => {
 };
 
 export const createBooking = async (req, res) => {
-    const { RoomName, Guest, Date, BookedFrom, BookedTill, Status } = req.body;
+    const { RoomName, Guest, MobileNumber, Date, BookedFrom, BookedTill, Status } = req.body;
 
     const newBooking = new Booking({
         RoomName,
         Guest,
+        MobileNumber,
         Date,
         BookedFrom,
         BookedTill,
