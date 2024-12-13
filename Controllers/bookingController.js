@@ -63,3 +63,33 @@ export const deleteBooking = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+export const statusBooking = async (req, res) => {
+
+    const roomID = req.params.id;
+    const {Status} = req.body;
+
+    const validStatus = ['booked', 'in use' , 'keys returned'];
+    if(!validStatus.includes(Status)) {
+        return res.status(400).json({error: 'Invalid status.'})
+    }
+
+    try {
+        const updatedStatus = await Booking.findByIdAndUpdate(
+            roomID,
+            {Status},
+            {new: true, runValidators: true}
+        );
+
+        if(!updatedStatus) {
+            return res.status(404).json({error: 'Room not Found'});
+        }
+
+        res.status(200).json({
+            message: 'Room status updated successfully',
+            booking: updatedStatus 
+        });
+    } catch(error) {
+        res.status(500).json({ error: 'Error', details: error.message});
+    }
+};

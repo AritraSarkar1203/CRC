@@ -7,5 +7,6 @@ const router = express.Router();
 router.get('/all',authenticateToken, getBookings);
 router.post('/create',authenticateToken, createBooking);
 router.delete('/delete/:id',authenticateToken, deleteBooking);
+router.patch('/:id/status' , statusBooking);
 
 export default router;
