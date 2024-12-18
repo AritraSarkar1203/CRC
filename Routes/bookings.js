@@ -4,9 +4,9 @@ import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/all',authenticateToken, getBookings);
-router.post('/create',authenticateToken, createBooking);
-router.delete('/delete/:id',authenticateToken, deleteBooking);
+router.get('/all', getBookings);
+router.post('/create',createBooking);
+router.delete('/delete/:id', deleteBooking);
 router.patch('/:id/status' , statusBooking);
 
 export default router;
